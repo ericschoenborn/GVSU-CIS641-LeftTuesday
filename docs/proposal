@@ -1,0 +1,47 @@
+Team name: LeftTuesday
+
+Team members: Eric Schoenborn
+
+# Introduction
+
+LeftTuesday will eventually be a fully functional task planning system built around user ease.
+For this class I will be fucusing on the backend.
+Goals for the end of the semester will be to have a API that allows elevated users to created tasks with the
+abbility to add time contraints. At the same time the LeftTuesday API will allow non-elevated users to view these
+tasks and see their progress. Finally there will be a mid-elevated user that will be able to track the non-elevated
+users progress.
+
+The easies way to view this would be the Project manager -> Supervisor -> worker relation, but please remember, 
+LeftTuesday is so much more.
+
+# Anticipated Technologies
+
+* C#
+# DotNet Core 5
+# Data store (tbd)
+# might add a frontend
+
+# Method/Approach
+
+The project is going full agile. The reasoning is that functional parts will be added one at a time in a develop to feature pipeline.
+Whith this aproach, the project should be more resistance to changes.
+
+# Estimated Timeline
+
+## Short term (one week)
+Create a pingable api that renturns and echo
+
+## Mid term (three weeks)
+* Full list of needed endpoints
+* Well definded DDD modedes and a sound understanding of their relations
+* Some fully funcitoning endpoints
+* Data storage plan
+
+## Long term
+Have a completed project
+
+# Anticipated Problems
+
+* Data storage: videos take up a lot of space
+* Rights and privacey of those demoing for the videos
+* Front end?
