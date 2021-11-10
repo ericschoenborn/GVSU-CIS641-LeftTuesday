@@ -4,6 +4,8 @@ using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LeftTuesday.Repository;
+using LeftTuesday.Services;
 
 namespace LeftTuesday.Controllers
 {
@@ -33,6 +35,18 @@ namespace LeftTuesday.Controllers
                 return BadRequest(ex.Message);
             }
 
+            return Ok("conneciton good");
+        }
+
+        [HttpGet("ensure")]
+        public IActionResult Ensure()
+        {
+            var ini = new InitializeService();
+            var iniError = ini.InitializeDatabase();
+            if(iniError != null)
+            {
+                return BadRequest(iniError.Message);
+            }
             return Ok("conneciton good");
         }
     }

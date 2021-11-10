@@ -1,0 +1,25 @@
+Team name: LeftTuesday
+
+Members present: All
+
+Date: 11-10-2021
+
+Time: 11:00pm
+
+Discussion points:
+
+*Alot happend, like a whole lot
+*this is meeting covers more then one week
+*data store set up and C# code to ensure tables exist exist
+*new object is needed called Session. It has been decided that a concept should be a re-usesable item
+ to achive this a session is the "living" instance of a Concept. Think of it as a geometry math class.
+ "Geometry" is the Concept and "Fall 2021" is the Session
+*Concept Manager is now a user with limited editing access to a Concept
+*New Object SessionLeader takes over the left over access from former Concept Manager
+*Concept no longer has Participants. Rather a Session has a 1:1 relation with a Concept and 1:m relation with participants
+
+Goals for next week (include responsibilities)
+
+- Keep on keeping on
+- object validation
+- maybe get to permissions
