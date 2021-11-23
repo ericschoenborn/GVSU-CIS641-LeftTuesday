@@ -7,6 +7,15 @@ namespace LeftTuesday.Models
 {
     public class Concept
     {
+        public Concept() { }
+
+        public Concept(Concept t)
+        {
+            Id = t.Id;
+            Name = t.Name;
+            Description = t.Description;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

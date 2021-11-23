@@ -89,43 +89,20 @@ namespace LeftTuesday.Repository
             }
         }
 
-        public static (Exception, T) Query<T>(string cmdString)where T : class, new()
+        public static (Exception, T) QuerySingle<T>(string cmdString)where T : class, new()
         {
             try
             {
-                _con.Open();
-                var cmd = new MySqlCommand(cmdString, _con);
-                var reader = cmd.ExecuteReader();
-
-                object value = 0;
-                if (reader != null && reader.Read())
+                var reader = GetReader(cmdString);
+                T t = null;
+                if (reader.Read())
                 {
-                    Type type = typeof(T);
-                    var accessor = TypeAccessor.Create(type);
-                    var members = accessor.GetMembers();
-                    var t = new T();
-
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        if (!reader.IsDBNull(i))
-                        {
-                            var fieldName = reader.GetName(i);
-                            //i dont like this
-                            fieldName = char.ToUpper(fieldName[0]) + fieldName.Substring(1);
-
-                            if (members.Any(m => string.Equals(m.Name, fieldName, StringComparison.OrdinalIgnoreCase)))
-                            {
-                                accessor[t, fieldName] = reader.GetValue(i);
-                            }
-                        }
-                    }
-
-                    value = t;
+                    t = ValueReader<T>(reader);
                 }
-
+                
                 _con.Close();
 
-                return (null, (T)value);
+                return (null, t);
             }
             catch (Exception ex)
             {
@@ -136,6 +113,68 @@ namespace LeftTuesday.Repository
 
                 return (ex, default);
             }
+        }
+
+        public static (Exception, List<T>) QueryMany<T>(string cmdString) where T : class, new()
+        {
+            try
+            {
+                var reader = GetReader(cmdString);
+
+                var list = new List<T>();
+
+                while (reader.Read())
+                {
+                    var t = ValueReader<T>(reader);
+
+                    list.Add((T)Activator.CreateInstance(typeof(T), new object[] { t }));
+                }
+ 
+                _con.Close();
+
+                return (null, list);
+            }
+            catch (Exception ex)
+            {
+                if (_con != null)
+                {
+                    _con.Close();
+                }
+
+                return (ex, default);
+            }
+        }
+
+        private static MySqlDataReader GetReader(string cmdString)
+        {
+            _con.Open();
+            var cmd = new MySqlCommand(cmdString, _con);
+            return cmd.ExecuteReader();
+        }
+
+        private static T ValueReader<T>(MySqlDataReader reader) where T : class, new()
+        {
+            Type type = typeof(T);
+            var accessor = TypeAccessor.Create(type);
+            var members = accessor.GetMembers();
+            var t = new T();
+
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (!reader.IsDBNull(i))
+                {
+                    var fieldName = reader.GetName(i);
+                    //i dont like this
+                    fieldName = char.ToUpper(fieldName[0]) + fieldName.Substring(1);
+
+                    if (members.Any(m => string.Equals(m.Name, fieldName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        accessor[t, fieldName] = reader.GetValue(i);
+                    }
+                }
+            }
+
+            return t;
         }
 
         /*        public SqlHelper()

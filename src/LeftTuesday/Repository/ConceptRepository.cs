@@ -21,21 +21,29 @@ namespace LeftTuesday.Repository
         public (Exception, Concept) GetConcpet(int conceptId)
         {
             var cmdString = @$"Select * From concept WHERE id = {conceptId}";
-            return SqlHelper.Query<Concept>(cmdString);
+            return SqlHelper.QuerySingle<Concept>(cmdString);
+        }
+
+        public (Exception, List<Concept>) GetConcpets()
+        {
+            var cmdString = @$"Select * From concept;";
+            return SqlHelper.QueryMany<Concept>(cmdString);
         }
 
         public (Exception, Concept) UpdateConcpet(Concept concept)
         {
-            throw new NotImplementedException("get this done");
-            var cmdString = @$";";
-            return SqlHelper.Query<Concept>(cmdString);
+            var cmdString = @$"UPDATE concept
+                                SET name='{concept.Name}',
+                                description='{concept.Description}'
+                                WHERE id='{concept.Id}';";
+
+            return (SqlHelper.NonQuery(cmdString), concept);
         }
 
         public (Exception, bool) DeleteConcpet(int id)
         {
-            throw new NotImplementedException("get this done");
-            var cmdString = @$";";
-            return (null, true);
+            var cmdString = @$"DELETE FROM concept WHERE id ={id}";
+            return (SqlHelper.NonQuery(cmdString), true);
         }
     }
 }

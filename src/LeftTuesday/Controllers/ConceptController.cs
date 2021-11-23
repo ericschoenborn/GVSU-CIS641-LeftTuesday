@@ -2,47 +2,45 @@
 using LeftTuesday.Repository;
 using LeftTuesday.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace LeftTuesday.Controllers
 {
     [Route("Concept")]
-    public class ConceptController : Controller
+    public class ConceptController : BaseController
     {
         //Todo DI
         private ConceptService _conceptService = new ConceptService(new ConceptRepository());
 
+        [HttpGet("all")]
         public IActionResult GetAllConcepts()
         {
-            //Todo User validation
-
-            return Ok(new List<Concept>());
-        }
-
-        [HttpPost("create")]
-        public IActionResult CreateConcept([FromBody] Concept concept)
-        {
-            //Todo User validation
-            var (error, value) = _conceptService.CreateConcept(concept);
-
-            if (error != null)
-            {
-                return BadRequest(error.Message);
-            }
-            return Ok(value);
+            return ReturnValueOrError(_conceptService.GetConcepts());
         }
 
         [HttpPost("get")]
         public IActionResult CreateConcept([FromQuery] int conceptId)
         {
-            //Todo User validation
-            var (error, value) = _conceptService.GetConcept(conceptId);
+            return ReturnValueOrError(_conceptService.GetConcept(conceptId));
+        }
 
-            if (error != null)
-            {
-                return BadRequest(error.Message);
-            }
-            return Ok(value);
+        [HttpPost("create")]
+        public IActionResult CreateConcept([FromBody] Concept concept)
+        {
+            return ReturnValueOrError(_conceptService.CreateConcept(concept));
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult DeleteConcept([FromQuery] int conceptId)
+        {
+            return ReturnValueOrError(_conceptService.DeleteConcept(conceptId));
+        }
+
+        [HttpPut("update")]
+        public IActionResult UpdateConcept([FromBody] Concept concept)
+        {
+            return ReturnValueOrError(_conceptService.UpdateConcept(concept));
         }
     }
 }
