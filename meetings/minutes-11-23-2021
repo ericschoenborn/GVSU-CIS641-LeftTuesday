@@ -1,0 +1,19 @@
+Team name: LeftTuesday
+
+Members present: All
+
+Date: 11-23-2021
+
+Time: 11:00pm
+
+Discussion points:
+
+*Finsihed CRUD for Task
+*Found out I cannot use the object name "Task" b/c its a reserved word in C#
+*Task is now TaskObj
+*Fixed errors in Concept CRUD
+
+Goals for next week (include responsibilities)
+
+- Finsih more CRUD Operations
+- look into adding complex operations (aka adding tasks to concepts)

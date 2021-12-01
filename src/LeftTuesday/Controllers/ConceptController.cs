@@ -19,8 +19,8 @@ namespace LeftTuesday.Controllers
             return ReturnValueOrError(_conceptService.GetConcepts());
         }
 
-        [HttpPost("get")]
-        public IActionResult CreateConcept([FromQuery] int conceptId)
+        [HttpGet("get")]
+        public IActionResult GetConcept([FromQuery] int conceptId)
         {
             return ReturnValueOrError(_conceptService.GetConcept(conceptId));
         }
@@ -31,16 +31,16 @@ namespace LeftTuesday.Controllers
             return ReturnValueOrError(_conceptService.CreateConcept(concept));
         }
 
-        [HttpDelete("delete")]
-        public IActionResult DeleteConcept([FromQuery] int conceptId)
-        {
-            return ReturnValueOrError(_conceptService.DeleteConcept(conceptId));
-        }
-
         [HttpPut("update")]
         public IActionResult UpdateConcept([FromBody] Concept concept)
         {
             return ReturnValueOrError(_conceptService.UpdateConcept(concept));
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult DeleteConcept([FromQuery] int conceptId)
+        {
+            return ReturnValueOrError(_conceptService.DeleteConcept(conceptId));
         }
     }
 }

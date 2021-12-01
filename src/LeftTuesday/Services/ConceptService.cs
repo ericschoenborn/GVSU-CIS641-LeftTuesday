@@ -19,6 +19,7 @@ namespace LeftTuesday.Services
         public (Exception, long) CreateConcept(Concept concept)
         {
             //Todo add validation
+
             return _conceptRepo.AddConcpet(concept);
         }
 

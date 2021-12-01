@@ -14,6 +14,8 @@ namespace LeftTuesday.Models
             Id = t.Id;
             Name = t.Name;
             Description = t.Description;
+            Crated = t.Crated;
+            //TODO Carted -> Created
         }
 
         public int Id { get; set; }
@@ -21,6 +23,8 @@ namespace LeftTuesday.Models
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime Crated { get; set; }
     }
 
     public class ConceptVisual
@@ -32,6 +36,8 @@ namespace LeftTuesday.Models
         public List<User> Participants { get; set; }
 
         public List<Task> Tasks { get; set; }
+
+        public DateTime CreatedAt { get; set; }
 
         public string Description { get; set; }
 
