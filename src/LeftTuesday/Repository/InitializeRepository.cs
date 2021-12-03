@@ -19,7 +19,7 @@ namespace LeftTuesday.Repository
             var cmdString = @"CREATE TABLE IF NOT EXISTS `user` (
                   `id` int(11) NOT NULL auto_increment,       
                   `name` varchar(50)  NOT NULL default '',     
-                  `crated` DATETIME DEFAULT CURRENT_TIMESTAMP,     
+                  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
                 ); ";
             return SqlHelper.NonQuery(cmdString);
@@ -31,7 +31,7 @@ namespace LeftTuesday.Repository
                   `id` int(11) NOT NULL auto_increment,       
                   `name` varchar(50)  NOT NULL default '',
                   `description` varchar(50)  NOT NULL default '',
-                  `crated` DATETIME DEFAULT CURRENT_TIMESTAMP,     
+                  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
                 ); ";
             return SqlHelper.NonQuery(cmdString);
@@ -43,7 +43,7 @@ namespace LeftTuesday.Repository
                   `id` int(11) NOT NULL auto_increment,       
                   `name` varchar(50)  NOT NULL default '',
                   `description` varchar(50)  NOT NULL default '',
-                  `crated` DATETIME DEFAULT CURRENT_TIMESTAMP,     
+                  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
                 ); ";
             return SqlHelper.NonQuery(cmdString);
@@ -53,9 +53,9 @@ namespace LeftTuesday.Repository
         {
             var cmdString = @"CREATE TABLE IF NOT EXISTS `content` (
                   `id` int(11) NOT NULL auto_increment,       
-                  `type` TINYINT  NOT NULL default 0,
+                  `type` int(11)  NOT NULL default 0,
                   `value` varchar(500)  NOT NULL default '',
-                  `crated` DATETIME DEFAULT CURRENT_TIMESTAMP,     
+                  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
                 ); ";
             return SqlHelper.NonQuery(cmdString);
@@ -92,7 +92,7 @@ namespace LeftTuesday.Repository
                   `description` varchar(50)  NOT NULL default '',
                   `start` DATETIME NOT NULL,
                   `end` DATETIME NOT NULL,
-                  `crated` DATETIME DEFAULT CURRENT_TIMESTAMP,     
+                  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
                 ); ";
             return SqlHelper.NonQuery(cmdString);

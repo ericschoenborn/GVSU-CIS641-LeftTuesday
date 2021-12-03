@@ -1,0 +1,19 @@
+Team name: LeftTuesday
+
+Members present: All
+
+Date: 12-02-2021
+
+Time: 11:00pm
+
+Discussion points:
+
+*Finsihed CRUD for Concept
+*Fixed persitant "crated" error
+*Added endpoint to drop database for tesitng. needs to be removed
+*Accedentally deleted work part way through. didnt get to complex oerations as planned
+
+Goals for next week (include responsibilities)
+
+- Finsih more CRUD Operations
+- look into adding complex operations (aka adding tasks to concepts)

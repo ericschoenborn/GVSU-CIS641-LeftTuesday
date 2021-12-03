@@ -49,5 +49,20 @@ namespace LeftTuesday.Controllers
             }
             return Ok("conneciton good");
         }
+
+        [HttpDelete("Delete")]
+        public IActionResult JetisionDatabase([FromQuery] string secretCode)
+        {
+            //TODO REMOVE THIS BEFORE DEPLOY!!!!!!!!!!
+            if(secretCode != "doIt")
+            {
+                return BadRequest("ah ah ah");
+
+            }
+
+            var cmdString = @$"DROP DATABASE IF EXISTS lefttuesday";
+            SqlHelper.NonQuery(cmdString);
+            return Ok();
+        }
     }
 }
