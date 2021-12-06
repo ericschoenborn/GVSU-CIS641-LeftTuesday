@@ -9,7 +9,11 @@ namespace LeftTuesday.Controllers
     public class ContentController : BaseController
     {
         //TODO DI
-        private ContentService _contentService = new ContentService(new ContentRepository());
+        private ContentService _contentService;
+        public ContentController(ContentService contentService)
+        {
+            _contentService = contentService;
+        }
 
         [HttpGet("all")]
         public IActionResult GetAllContents()

@@ -16,5 +16,14 @@ namespace LeftTuesday.Controllers
             }
             return Ok(result.value);
         }
+
+        public IActionResult ReturnValueOrError<T>((List<Exception> errors, T value) result)
+        {
+            if (result.errors.Any())
+            {
+                return BadRequest(result.errors);
+            }
+            return Ok(result.value);
+        }
     }
 }

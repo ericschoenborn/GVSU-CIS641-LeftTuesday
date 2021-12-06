@@ -18,7 +18,7 @@ namespace LeftTuesday.Repository
             return SqlHelper.Insert(cmdString);
         }
 
-        public (Exception, Concept) GetConcpet(int conceptId)
+        public (Exception, Concept) GetConcpet(long conceptId)
         {
             var cmdString = @$"Select * From concept WHERE id = {conceptId}";
             return SqlHelper.QuerySingle<Concept>(cmdString);

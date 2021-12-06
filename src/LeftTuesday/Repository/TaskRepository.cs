@@ -13,7 +13,7 @@ namespace LeftTuesday.Repository
         }
 
 
-        public (Exception, TaskObj) GetTask(int taskId)
+        public (Exception, TaskObj) GetTask(long taskId)
         {
             var cmdString = @$"Select * From task WHERE id = {taskId}";
             return SqlHelper.QuerySingle<TaskObj>(cmdString);

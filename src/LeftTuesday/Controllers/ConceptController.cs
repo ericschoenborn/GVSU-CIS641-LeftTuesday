@@ -10,8 +10,12 @@ namespace LeftTuesday.Controllers
     [Route("Concept")]
     public class ConceptController : BaseController
     {
-        //Todo DI
-        private ConceptService _conceptService = new ConceptService(new ConceptRepository());
+        private readonly ConceptService _conceptService;
+
+        public ConceptController(ConceptService conceptService)
+        {
+            _conceptService = conceptService;
+        }
 
         [HttpGet("all")]
         public IActionResult GetAllConcepts()

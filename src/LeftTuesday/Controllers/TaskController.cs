@@ -12,8 +12,12 @@ namespace LeftTuesday.Controllers
     [Route("Task")]
     public class TaskController : BaseController
     {
-        //TODO DI
-        private TaskService _taskService = new TaskService(new TaskRepository());
+        private TaskService _taskService;
+
+        public TaskController(TaskService taskService)
+        {
+            _taskService = taskService;
+        }
 
         [HttpGet("all")]
         public IActionResult GetAllTasks()
