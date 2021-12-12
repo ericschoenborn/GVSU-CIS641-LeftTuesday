@@ -12,8 +12,7 @@ namespace LeftTuesday.Repository
             return SqlHelper.QueryMany<Content>(cmdString);
         }
 
-
-        public (Exception, Content) GetContent(int contentId)
+        public (Exception, Content) GetContent(long contentId)
         {
             var cmdString = @$"Select * From content WHERE id = {contentId}";
             return SqlHelper.QuerySingle<Content>(cmdString);

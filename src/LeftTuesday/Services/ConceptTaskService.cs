@@ -22,11 +22,6 @@ namespace LeftTuesday.Services
             _conceptRepo = conceptRepo;
         }
 
-        internal (Exception error, List<ConceptTask> value) GetConceptTasks()
-        {
-            throw new NotImplementedException();
-        }
-
         public (Exception, List<ConceptTask>) GetConceptTasks(long conceptId)
         {
             if (conceptId == default)
@@ -44,45 +39,50 @@ namespace LeftTuesday.Services
             return _conceptTaskRepo.GetConceptTasks(conceptId);
         }
 
-        public (List<Exception>, bool) AddMany(long conceptId, List<long> taskIds)
+        public (Exception, List<ConceptTask>) GetAllConceptTasks()
+        {
+            return _conceptTaskRepo.GetAllConceptTasks();
+        }
+
+        public (Exception, bool) AddConceptTask(long conceptId, long taskId)
         {
             if(conceptId == default)
             {
-                return (new List<Exception> { new Exception("No Concept ID given.") }, false);
+                return (new Exception("No Concept ID given."), false);
+            }
+
+            if (conceptId == default)
+            {
+                return (new Exception("No Concept ID given."), false);
             }
 
             var (conceptError, conceptTasks) = GetConceptTasks(conceptId);
 
             if(conceptError != null)
             {
-                return (new List<Exception> { conceptError }, false);
+                return (conceptError, false);
             }
 
-            var exceptions = new List<Exception>();
-
-            var acceptedTaskIds = taskIds.Where(e => !conceptTasks.Exists(c => c.Task == e) && e != default);
-
-            foreach (var taskId in acceptedTaskIds)
+            if(conceptTasks.Exists(e => e.Task == taskId))
             {
-                var (findTaskError, task) = _taskRepo.GetTask(taskId);
-
-                if(findTaskError != null || task == null)
-                {
-                    exceptions.Add(findTaskError ?? new Exception($"No Task found with id {taskId}"));
-                    continue;
-                }
-
-                var (error, _) = _conceptTaskRepo.Add(conceptId, taskId);
-
-                if(error != null)
-                {
-                    exceptions.Add(error);
-                }
+                return (null, true);
             }
 
-            var moo = exceptions.Any();
+            var (findTaskError, task) = _taskRepo.GetTask(taskId);
 
-            return (exceptions, moo);
+            if(findTaskError != null || task == null)
+            {
+                return(findTaskError ?? new Exception($"No Task found with id {taskId}"), false);
+            }
+
+            var (error, _) = _conceptTaskRepo.Add(conceptId, taskId);
+
+            return (error, error == null);
+        }
+
+        public (Exception, bool) DeleteConceptTask(long conceptId, long taskId)
+        {
+            return _conceptTaskRepo.DeleteConcpetTask(conceptId, taskId);
         }
     }
 }

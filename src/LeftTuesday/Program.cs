@@ -38,6 +38,9 @@ namespace LeftTuesday
 
                 builder.RegisterType<ConceptTaskService>().AsSelf();
                 builder.RegisterType<ConceptTaskRepository>().AsSelf();
+
+                builder.RegisterType<TaskContentService>().AsSelf();
+                builder.RegisterType<TaskContentRepository>().AsSelf();
             })
             .UseConsoleLifetime()
             .Build()

@@ -19,10 +19,22 @@ namespace LeftTuesday.Repository
             return SqlHelper.Insert(cmdString);
         }
 
-        internal (Exception, List<ConceptTask>) GetConceptTasks(long conceptId)
+        public (Exception, List<ConceptTask>) GetConceptTasks(long conceptId)
         {
             var cmdString = @$"Select * From concept_task WHERE concept = {conceptId};";
             return SqlHelper.QueryMany<ConceptTask>(cmdString);
+        }
+
+        public (Exception, List<ConceptTask>) GetAllConceptTasks()
+        {
+            var cmdString = @$"Select * From concept_task";
+            return SqlHelper.QueryMany<ConceptTask>(cmdString);
+        }
+
+        public (Exception, bool) DeleteConcpetTask(long conceptId, long taskId)
+        {
+            var cmdString = @$"DELETE FROM concept_task WHERE concept ={conceptId} AND task = {taskId}";
+            return (SqlHelper.NonQuery(cmdString), true);
         }
     }
 }

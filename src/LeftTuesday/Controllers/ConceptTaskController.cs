@@ -20,7 +20,7 @@ namespace LeftTuesday.Controllers
         [HttpGet("all")]
         public IActionResult GetAll()
         {
-            return ReturnValueOrError(_conceptTaskService.GetConceptTasks());
+            return ReturnValueOrError(_conceptTaskService.GetAllConceptTasks());
         }
 
         [HttpGet("allconcept")]
@@ -29,10 +29,16 @@ namespace LeftTuesday.Controllers
             return ReturnValueOrError(_conceptTaskService.GetConceptTasks(conceptId));
         }
 
-        [HttpPost("addMany")]
-        public IActionResult AddMany([FromQuery] long conceptId, [FromQuery] List<long> taskIds)
+        [HttpPost("add")]
+        public IActionResult AddConceptTask([FromQuery] long conceptId, [FromQuery] long taskId)
         {
-            return ReturnValueOrError(_conceptTaskService.AddMany(conceptId, taskIds));
+            return ReturnValueOrError(_conceptTaskService.AddConceptTask(conceptId, taskId));
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult DeleteConceptTask([FromQuery] long conceptId, [FromQuery] long taskId)
+        {
+            return ReturnValueOrError(_conceptTaskService.DeleteConceptTask(conceptId, taskId));
         }
     }
 }
