@@ -15,7 +15,6 @@ namespace LeftTuesday.Models
             Type = t.Type;
             Value = t.Value;
             Created = t.Created;
-                            //TODO Carted -> Created
         }
 
         public int Id { get; set; }

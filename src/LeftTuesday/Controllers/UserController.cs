@@ -1,35 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LeftTuesday.Models;
+using LeftTuesday.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LeftTuesday.Controllers
 {
     [Route("User")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        [HttpGet("gettasks/{id}")]
-        public IActionResult GetTasks([FromRoute]int id)
+        private readonly UserService _userServcie;
+
+        public UserController(UserService userService)
         {
-            if(id == 1)
-            {
-                return Ok("Task              Complete\n" +
-                    "One                    N" +
-                    "Two                    N" +
-                    "Three                  N");
-            }
-            return Ok("Task completed.");
+            _userServcie = userService;
         }
 
-        [HttpGet("user/{id}")]
-        public IActionResult SignOff([FromRoute] int id)
+        [HttpGet("get")]
+        public IActionResult GetUser([FromQuery] string userName, [FromQuery] string secret)
         {
-            if (id == 1)
-            {
-                return Unauthorized("You donot have permission to sign off on this task");
-            }
-            return Ok("Task completed.");
+            return ReturnValueOrError(_userServcie.GetUser(userName, secret));
+        }
+
+        [HttpPost("create")]
+        public IActionResult CreateUser([FromBody] User user)
+        {
+            return ReturnValueOrError(_userServcie.CreateUser(user));
+        }
+
+        [HttpPut("update")]
+        public IActionResult UpdateUser([FromBody] User user, [FromQuery] string userName, [FromQuery] string secret)
+        {
+            return ReturnValueOrError(_userServcie.UpdateUser(user, userName, secret));
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult DeleteUser([FromQuery] string userName, [FromQuery] string secret)
+        {
+            return ReturnValueOrError(_userServcie.DeleteUser(userName, secret));
         }
     }
 }

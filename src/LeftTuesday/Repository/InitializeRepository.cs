@@ -18,7 +18,8 @@ namespace LeftTuesday.Repository
         {
             var cmdString = @"CREATE TABLE IF NOT EXISTS `user` (
                   `id` int(11) NOT NULL auto_increment,       
-                  `name` varchar(50)  NOT NULL default '',     
+                  `name` varchar(50) NOT NULL default '',
+                  `secret` varchar(400) NOT NULL default '', 
                   `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
                 ); ";
