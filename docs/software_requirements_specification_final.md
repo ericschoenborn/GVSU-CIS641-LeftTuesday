@@ -1,9 +1,9 @@
 # Overview
-There are many groups that have a similar workflow that can be sumed up in this need "I need these tasks done in this amount of time, signed off by this person". Though it is a commen need thats easy to understand, the complexity makes it so not many suitable tools exist to fulfill this need and cordinate the information to everyone involved in a real time. LeftTuesday seeks to be the solution to this problem.
+There are many groups that have a similar workflow that can be summed up in this need "I need these tasks done in this amount of time, signed off by this person". Though it is a common need that is easy to understand, the complexity makes it so not many suitable tools exist to fulfill this need and coordinate the information to everyone involved in a real time. LeftTuesday seeks to be the solution to this problem.
 
 Any company with a hierarchical structure that aims to complete tasks will benefit from LeftTuesday. The largest advantage LeftTuesday has over the traditional document is that changes and progress can be viewed in real time.
 # Software Requirements
-- Must have a machine that can execute .net applicaiton
+- Must have a machine that can execute .net application
 - Must have MySql installed
 - Must have a way to send http requests
 ## Functional Requirements
@@ -51,14 +51,14 @@ Any company with a hierarchical structure that aims to complete tasks will benef
 ### Concept
 | ID | Requirement |
 | :-------------: | :----------: |
-| NFR1 | There exists a data object stuctured in the sql normal from for storing Concepts. |
+| NFR1 | There exists a data object structured in the sql normal from for storing Concepts. |
 | NFR2 | There exists a data object structured in a human readable way for displaying Concepts. |
 | NFR3 | All values in a request shall be validated. |
 | NFR4 | All values in a request shall be sanitized. |
 ### Task
 | ID | Requirement |
 | :-------------: | :----------: |
-| NFR5 | There exists a data object stuctured in the sql normal from for storing Task. |
+| NFR5 | There exists a data object structured in the sql normal from for storing Task. |
 | NFR6 | There exists a data object structured in a human readable way for displaying Task. |
 | NFR7 | All values in a request shall be validated. |
 | NFR8 | All values in a request shall be sanitized. |
@@ -88,30 +88,35 @@ Any company with a hierarchical structure that aims to complete tasks will benef
 | :-------------: | :----------: |
 | NFR21 | Data object shall be persisted in a data store. |
 | NFR22 | Requests shall be consumed by a http style API. |
-| NFR23 | Code will be orginized in Concomption, Work, and Datastore layers to increase code maintainablility and adatablility. |
-| NFR24 | Code layers will rely on Dependancy Injection to increase code maintainablility and adatablility. |
-| NFR25 | Each reasorce will have its own class per layer to increase code maintainablility and adatablility. |
+| NFR23 | Code will be organized in Concomption, Work, and Datastore layers to increase code maintainability and adaptability. |
+| NFR24 | Code layers will rely on Dependency Injection to increase code maintainability and adaptability. |
+| NFR25 | Each resource will have its own class per layer to increase code maintainability and adaptability. |
 # Change management plan
-<Description of what this section is>
+Before making any changes unit tests will need to be made to cover the code. The first thing that should be added to this application is to sanitize incoming data. Due to a scope change no sanitation methods have been added. Next cascading deletes need to be added. At this point in time, deletes only affect the resource given. Finally the authentication is very minimal and should be updated to be more effective.
+
+As it stands this application is very proficient in storing data and the code was written with maintainability in mind. Going forward, I highly suggest the the code continues to maintain the Controller, Service, Repository model. Any changes to the data store should continue to follow the Normal forms standard.
+
+This application has much potential to cover even more types of jobs and have specified rolls added for unique rules. As it stands, this API can be placed behind any custom frontend that will transform this generic tree manager into a specific organization job manager.
 # Traceability links
-<Description of this section>
+Here are the artifacts used to create this application
 ## Use Case Diagram Traceability
 | Artifact ID | Artifact Name | Requirement ID |
 | :-------------: | :----------: | :----------: |
-| UseCase1 | Move Player | FR5 |
+| 01| ClassDiagrams1 | FR1-10 |
 | … | … | … |
 ## Class Diagram Traceability
 | Artifact Name | Requirement ID |
 | :-------------: |:----------: |
-| classPlayer | NFR3, FR5 |
+|ClassDiagram+ConceptModel.png| NFR1-5|
 | … | … | … |
 ## Activity Diagram Traceability
-<In this case, it makes more sense (I think, feel free to disagree) to link
-to the file and to those requirements impacted>
 | Artifact ID | Artifact Name | Requirement ID |
 | :-------------: | :----------: | :----------: |
-| <filename> | Handle Player Input | FR1-5, NFR2 |
+| 01 | ActivityDiagram1.png | FR1-15 |
 | … | … | … |
 # Software Artifacts
-<Describe the purpose of this section>
-* [I am a link](to_some_file.pdf)
+Here are the above mentions resources
+* [ActivityDiagram1.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/docs/Diagrams/ActivityDiagram1.png)
+*[ClassDiagram+ConceptModel.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/docs/Diagrams/ClassDiagram%2BConceptModel.png)
+*[UseCaseses1](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/docs/Diagrams/UseCases1.png)
+
