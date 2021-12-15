@@ -36,11 +36,5 @@ namespace LeftTuesday.Repository
             var cmdString = @$"DELETE FROM concept_task WHERE concept ={conceptId} AND task = {taskId}";
             return (SqlHelper.NonQuery(cmdString), true);
         }
-
-        public (Exception, Concept) GetConcpet(long conceptId)
-        {
-            var cmdString = @$"Select * From concept WHERE id = {conceptId}";
-            return SqlHelper.QuerySingle<Concept>(cmdString);
-        }
     }
 }

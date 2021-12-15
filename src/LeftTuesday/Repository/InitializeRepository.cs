@@ -131,5 +131,18 @@ namespace LeftTuesday.Repository
                 ); ";
             return SqlHelper.NonQuery(cmdString);
         }
+
+        public Exception EnsureCompletedTaskTable()
+        {
+            var cmdString = @"CREATE TABLE IF NOT EXISTS `completed_task` (
+                  `id` int(11) NOT NULL auto_increment,       
+                  `session` int(11) NOT NULL,
+                  `participant` int(11) NOT NULL,
+                  `task` int(11) NOT NULL,
+                  `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+                   PRIMARY KEY(`id`)
+                ); ";
+            return SqlHelper.NonQuery(cmdString);
+        }
     }
 }

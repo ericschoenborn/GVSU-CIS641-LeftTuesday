@@ -91,6 +91,12 @@ namespace LeftTuesday.Services
             {
                 return error;
             }
+          
+            error = ini.EnsureCompletedTaskTable();
+            if (error != null)
+            {
+                return error;
+            }
 
             return null;
         }
