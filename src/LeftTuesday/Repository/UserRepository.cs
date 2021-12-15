@@ -21,6 +21,12 @@ namespace LeftTuesday.Repository
             return SqlHelper.QuerySingle<User>(cmdString);
         }
 
+        public (Exception, User) GetUserById(long userId)
+        {
+            var cmdString = @$"Select * From user WHERE id = '{userId}';";
+            return SqlHelper.QuerySingle<User>(cmdString);
+        }
+
         public (Exception, User) UpdateUser(User user)
         {
             var cmdString = @$"UPDATE user

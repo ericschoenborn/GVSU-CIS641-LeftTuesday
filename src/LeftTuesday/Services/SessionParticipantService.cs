@@ -12,48 +12,34 @@ namespace LeftTuesday.Services
         private SessionParticipantRepository _sessionParticipantRepo;
         private readonly SessionRepository _sessionRepo;
         private UserRepository _userRepo;
-        private ConceptRepository _conceptRepo;
+        private IsOwnerService _isOwnerService;
 
         public SessionParticipantService(SessionParticipantRepository sessionParticipantRepo,
             SessionRepository sessionRepo,
             UserRepository userRepo,
-            ConceptRepository conceptRepository)
+            IsOwnerService isOwnerService)
         {
             _sessionParticipantRepo = sessionParticipantRepo;
             _sessionRepo = sessionRepo;
             _userRepo = userRepo;
-            _conceptRepo = conceptRepository;
+            _isOwnerService = isOwnerService;
         }
 
-        private bool IsOwner(long sessionId, long userId)
+        public (Exception, List<SessionParticipant>) GetSessionParticipants(long sessionId, long ownerId)
         {
-            var (conceptError, session) = _sessionRepo.GetSession(sessionId);
-
-            if(conceptError != null)
+            if(!_isOwnerService.IsSessionOwner(sessionId, ownerId))
             {
-                return false;
+                return (new Exception("Verification failed"), null);
             }
 
-            var (error, conceptOwners) = _conceptRepo.GetConcpetOwners(session.Concept);
-
-            if (error != null)
-            {
-                return false;
-            }
-
-            return conceptOwners.Any(e => e.Owner == userId);
-        }
-
-        public (Exception, List<SessionParticipant>) GetSessionParticipants(long sessionId, long userId)
-        {
             if (sessionId == default)
             {
                 return (new Exception("No Session ID given."), null);
             }
 
-            var (conceptError, concept) = _sessionRepo.GetSession(sessionId);
+            var (conceptError, session) = _sessionRepo.GetSession(sessionId);
 
-            if (concept == null || conceptError != null)
+            if (session == null || conceptError != null)
             {
                 return (conceptError ?? new Exception($"No Session found with id {sessionId}"), null);
             }
@@ -61,50 +47,55 @@ namespace LeftTuesday.Services
             return _sessionParticipantRepo.GetSessionParticipant(sessionId);
         }
 
-        public (Exception, List<ConceptTask>) GetAllConceptTasks()
+        public (Exception, List<SessionParticipant>) GetAllSessionParticipant()
         {
-            return _conceptTaskRepo.GetAllConceptTasks();
+            return _sessionParticipantRepo.GetAllSessionParticipants();
         }
 
-        public (Exception, bool) AddConceptTask(long conceptId, long taskId)
+        public (Exception, bool) AddSessionParticipant(long sessionId, long participantId, long ownerId)
         {
-            if (conceptId == default)
+            if (sessionId == default)
             {
-                return (new Exception("No Concept ID given."), false);
+                return (new Exception("No Session ID given."), false);
             }
 
-            if (conceptId == default)
+            if (participantId == default)
             {
-                return (new Exception("No Concept ID given."), false);
+                return (new Exception("No Participant ID given."), false);
             }
 
-            var (conceptError, conceptTasks) = GetConceptTasks(conceptId);
+            var (sessionError, conceptTasks) = GetSessionParticipants(sessionId, ownerId);
 
-            if (conceptError != null)
+            if (sessionError != null)
             {
-                return (conceptError, false);
+                return (sessionError, false);
             }
 
-            if (conceptTasks.Exists(e => e.Task == taskId))
+            if (conceptTasks.Exists(e => e.Participant == participantId))
             {
                 return (null, true);
             }
 
-            var (findTaskError, task) = _taskRepo.GetTask(taskId);
+            var (findUserError, task) = _userRepo.GetUserById(participantId);
 
-            if (findTaskError != null || task == null)
+            if (findUserError != null || task == null)
             {
-                return (findTaskError ?? new Exception($"No Task found with id {taskId}"), false);
+                return (findUserError ?? new Exception($"No User found with id {participantId}"), false);
             }
 
-            var (error, _) = _conceptTaskRepo.Add(conceptId, taskId);
+            var (error, _) = _sessionParticipantRepo.Add(sessionId, participantId);
 
             return (error, error == null);
         }
 
-        public (Exception, bool) DeleteConceptTask(long conceptId, long taskId)
+        public (Exception, bool) DeleteConceptTask(long sessionId, long participantId, long ownerId)
         {
-            return _conceptTaskRepo.DeleteConcpetTask(conceptId, taskId);
+            if (!_isOwnerService.IsSessionOwner(sessionId, ownerId))
+            {
+                return (new Exception("Verification failed"), false);
+            }
+
+            return _sessionParticipantRepo.DeleteSessionParticipant(sessionId, participantId);
         }
     }
 }

@@ -57,6 +57,12 @@ namespace LeftTuesday.Repository
             return SqlHelper.QueryMany<ConceptOwner>(cmdString);
         }
 
+        public (Exception, List<ConceptOwner>) GetAllConcpetOwners()
+        {
+            var cmdString = @$"Select * From concept_owner;";
+            return SqlHelper.QueryMany<ConceptOwner>(cmdString);
+        }
+
         public (Exception, bool) DeleteConcpet(int id)
         {
             var cmdString = @$"DELETE FROM concept WHERE id ={id}";

@@ -11,7 +11,7 @@ namespace LeftTuesday.Repository
             var cmdString = @$"INSERT INTO session
                                 (name,concept,description,start,end) 
                                VALUES
-                                ('{session.Name}',{session.Concept},{session.Description},{session.Start},{session.End})
+                                ('{session.Name}',{session.Concept},'{session.Description}','{session.Start:yyyy-MM-dd}','{session.End:yyyy-MM-dd}')
                                ;SELECT LAST_INSERT_ID();";
             return SqlHelper.Insert(cmdString);
         }
@@ -34,8 +34,8 @@ namespace LeftTuesday.Repository
                                 SET name='{session.Name}',
                                 concept={session.Concept},
                                 description='{session.Description}',
-                                start='{session.Start}',
-                                end='{session.End}'
+                                start='{session.Start:yyyy-MM-dd}',
+                                end='{session.End:yyyy-MM-dd}'
                                 WHERE id='{session.Id}';";
 
             return (SqlHelper.NonQuery(cmdString), session);

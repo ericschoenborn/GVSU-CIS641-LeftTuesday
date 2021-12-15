@@ -2,8 +2,6 @@
 using LeftTuesday.Repository;
 using LeftTuesday.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace LeftTuesday.Controllers
 {
@@ -23,28 +21,34 @@ namespace LeftTuesday.Controllers
             return ReturnValueOrError(_conceptService.GetConcepts());
         }
 
-        [HttpGet("get")]
-        public IActionResult GetConcept([FromQuery] int conceptId)
+        [HttpGet("get/{ownerId}")]
+        public IActionResult GetConcept([FromQuery] int conceptId, long ownerId)
         {
-            return ReturnValueOrError(_conceptService.GetConcept(conceptId));
+            return ReturnValueOrError(_conceptService.GetConcept(conceptId, ownerId));
         }
 
-        [HttpPost("create")]
-        public IActionResult CreateConcept([FromBody] Concept concept)
+        [HttpGet("getowners")]
+        public IActionResult GetAllOwners()
         {
-            return ReturnValueOrError(_conceptService.CreateConcept(concept));
+            return ReturnValueOrError(_conceptService.GetAllConceptOwners());
         }
 
-        [HttpPut("update")]
-        public IActionResult UpdateConcept([FromBody] Concept concept)
+        [HttpPost("create/{ownerId}")]
+        public IActionResult CreateConcept([FromBody] Concept concept, long ownerId)
         {
-            return ReturnValueOrError(_conceptService.UpdateConcept(concept));
+            return ReturnValueOrError(_conceptService.CreateConcept(concept, ownerId));
         }
 
-        [HttpDelete("delete")]
-        public IActionResult DeleteConcept([FromQuery] int conceptId)
+        [HttpPut("update/{ownerId}")]
+        public IActionResult UpdateConcept([FromBody] Concept concept, long ownerId)
         {
-            return ReturnValueOrError(_conceptService.DeleteConcept(conceptId));
+            return ReturnValueOrError(_conceptService.UpdateConcept(concept,ownerId));
+        }
+
+        [HttpDelete("delete/{ownerId}")]
+        public IActionResult DeleteConcept([FromQuery] int conceptId, long ownerId)
+        {
+            return ReturnValueOrError(_conceptService.DeleteConcept(conceptId, ownerId));
         }
     }
 }

@@ -47,6 +47,11 @@ namespace LeftTuesday
 
                 builder.RegisterType<SessionService>().AsSelf();
                 builder.RegisterType<SessionRepository>().AsSelf();
+
+                builder.RegisterType<SessionParticipantService>().AsSelf();
+                builder.RegisterType<SessionParticipantRepository>().AsSelf();
+
+                builder.RegisterType<IsOwnerService>().AsSelf();
             })
             .UseConsoleLifetime()
             .Build()

@@ -70,7 +70,7 @@ namespace LeftTuesday.Services
                 original.End = session.End;
             }
 
-            return _sessionRepository.UpdateSession(session);
+            return _sessionRepository.UpdateSession(original);
         }
 
         public (Exception, bool) DeleteSession(int sessionId)

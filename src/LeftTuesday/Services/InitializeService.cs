@@ -86,6 +86,12 @@ namespace LeftTuesday.Services
                 return error;
             }
 
+            error = ini.EnsureConceptOwnerTable();
+            if (error != null)
+            {
+                return error;
+            }
+
             return null;
         }
     }
