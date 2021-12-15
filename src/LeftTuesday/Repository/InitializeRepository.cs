@@ -91,7 +91,7 @@ namespace LeftTuesday.Repository
                   `name` varchar(20)  NOT NULL default '',
                   `concept` int(11) NOT NULL,
                   `description` varchar(50)  NOT NULL default '',
-                  `start` DATETIME NOT NULL,
+                  `start` DATETIME DEFAULT CURRENT_TIMESTAMP,
                   `end` DATETIME NOT NULL,
                   `created` DATETIME DEFAULT CURRENT_TIMESTAMP,     
                    PRIMARY KEY(`id`)
@@ -116,6 +116,17 @@ namespace LeftTuesday.Repository
                   `id` int(11) NOT NULL auto_increment,       
                   `session` int(11) NOT NULL,
                   `participant` int(11) NOT NULL,
+                   PRIMARY KEY(`id`)
+                ); ";
+            return SqlHelper.NonQuery(cmdString);
+        }
+
+        public Exception EnsureConceptOwnerTable()
+        {
+            var cmdString = @"CREATE TABLE IF NOT EXISTS `concept_owner` (
+                  `id` int(11) NOT NULL auto_increment,       
+                  `concept` int(11) NOT NULL,
+                  `owner` int(11) NOT NULL,
                    PRIMARY KEY(`id`)
                 ); ";
             return SqlHelper.NonQuery(cmdString);

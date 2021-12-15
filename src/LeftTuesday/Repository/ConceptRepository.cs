@@ -18,6 +18,17 @@ namespace LeftTuesday.Repository
             return SqlHelper.Insert(cmdString);
         }
 
+        public (Exception, long) AddOwner(long conceptId, long ownerId)
+        {
+            var cmdString = @$"INSERT INTO concept_owner
+                                (concept,owner) 
+                               VALUES
+                                ('{conceptId}','{ownerId}')
+                               ;SELECT LAST_INSERT_ID();";
+
+            return SqlHelper.Insert(cmdString);
+        }
+
         public (Exception, Concept) GetConcpet(long conceptId)
         {
             var cmdString = @$"Select * From concept WHERE id = {conceptId}";
@@ -40,9 +51,21 @@ namespace LeftTuesday.Repository
             return (SqlHelper.NonQuery(cmdString), concept);
         }
 
+        public (Exception, List<ConceptOwner>) GetConcpetOwners(int conceptId)
+        {
+            var cmdString = @$"Select * From concept_owner WHERE concept = {conceptId};";
+            return SqlHelper.QueryMany<ConceptOwner>(cmdString);
+        }
+
         public (Exception, bool) DeleteConcpet(int id)
         {
             var cmdString = @$"DELETE FROM concept WHERE id ={id}";
+            return (SqlHelper.NonQuery(cmdString), true);
+        }
+
+        public (Exception, bool) DeleteConcpetOwner(int conceptId, int ownerId)
+        {
+            var cmdString = @$"DELETE FROM concept_owner WHERE concept ={conceptId} AND owner = {ownerId}";
             return (SqlHelper.NonQuery(cmdString), true);
         }
     }
