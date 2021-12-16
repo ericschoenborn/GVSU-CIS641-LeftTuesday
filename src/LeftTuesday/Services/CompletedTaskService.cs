@@ -55,7 +55,7 @@ namespace LeftTuesday.Services
                 return (new Exception("Verification failed"), null);
             }
 
-            return _completedTaskRepo.GetConceptTasksByParticipant(taskId);
+            return _completedTaskRepo.GetConceptTasksByTask(taskId);
         }
 
         public (Exception, CompletedTask) GetCompletedTaskById(long completedTaskId)

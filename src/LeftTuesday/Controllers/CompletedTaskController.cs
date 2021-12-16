@@ -26,8 +26,8 @@ namespace LeftTuesday.Controllers
             return ReturnValueOrError(_completedTaskService.GetCompletedTaskByTask(sessionId, ownerId, taskId));
         }
 
-        [HttpGet("getbyid/{ownerId}")]
-        public IActionResult GetByTask([FromQuery] long completedTaskId)
+        [HttpGet("getbyid/{completedTaskId}")]
+        public IActionResult GetByTask(long completedTaskId)
         {
             return ReturnValueOrError(_completedTaskService.GetCompletedTaskById(completedTaskId));
         }
