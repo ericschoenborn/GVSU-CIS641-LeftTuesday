@@ -97,26 +97,72 @@ Before making any changes unit tests will need to be made to cover the code. The
 As it stands this application is very proficient in storing data and the code was written with maintainability in mind. Going forward, I highly suggest the the code continues to maintain the Controller, Service, Repository model. Any changes to the data store should continue to follow the Normal forms standard.
 
 This application has much potential to cover even more types of jobs and have specified rolls added for unique rules. As it stands, this API can be placed behind any custom frontend that will transform this generic tree manager into a specific organization job manager.
+# How To Use
+## To run LeftTuesday locally: 
+* Start by cloneing the repository located at the repository resource.
+* Open the solution located at GVSU-CIS641-LeftTuesday/src/Leftuesday/LeftTuesday.sln
+* Build and run in your preferred mannor
+
+## To use LeftTuesday
+LeftTuesday is a web based API that follows the http standard. This means all you need to do to interact is send valid http requests.
+Added is a insomnia resource that contains most currently available endpoints. To use, download the insomnia json file and drag/drop it into the insomnia app. 
+
+## Stuck?
+If this application ever reaches a inpasible state, it is probbably due to bad data in the database. there is an endpoint within the insonia json under the debug folder named delete. this will delete the entire database and all its contents. Restarting the application will recreated the database with no data.
+When all else fails send an email to cricketevs@gmail.com with subject LeftTuesday for support.
+
 # Traceability links
 Here are the artifacts used to create this application
-## Use Case Diagram Traceability
+## Class Diagram Traceability
 | Artifact ID | Artifact Name | Requirement ID |
 | :-------------: | :----------: | :----------: |
-| 01| ClassDiagrams1 | FR1-10 |
+| 01| ClassDiagram1 | FR1-10 |
 | … | … | … |
 ## Class Diagram Traceability
 | Artifact Name | Requirement ID |
 | :-------------: |:----------: |
-|ClassDiagram+ConceptModel.png| NFR1-5|
+|StructuralModel1.png| FR1 |
+|StructuralModel2.png| FR6 |
+|StructuralModel3.png| NA |
+| … | … | … |
+## Use Cases Traceability
+| Artifact Name | Requirement ID |
+| :-------------: |:----------: |
+|ConceptUseCase.png| FR1-5 |
+|ContentUseCase.png| FR11-15 |
+|TaskUseCase.png| FR6-10 |
+|UserUseCase.png| FR16-20 |
 | … | … | … |
 ## Activity Diagram Traceability
 | Artifact ID | Artifact Name | Requirement ID |
 | :-------------: | :----------: | :----------: |
-| 01 | ActivityDiagram1.png | FR1-15 |
+| 01 | ActivityDiagramConceptInteractionFlow.png | FR1-15 |
+| 02 | ActivityDiagramTaskInteractionFlow01.png | FR1-15 |
+| 03 | ActivityDiagramTaskInteractionFlow02.png | FR1-15 |
+## Additional Planning Traceability
+|HCI01.png|
+|SequenceDiagram.png|
+|StateMap.png|
+|MiroLeftTuesday.pdf|
+## How To Use Traceability
+|Insomnia_2021-12-16.json|
 | … | … | … |
 # Software Artifacts
 Here are the above mentions resources
-* [ActivityDiagram1.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/docs/Diagrams/ActivityDiagram1.png)
-*[ClassDiagram+ConceptModel.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/docs/Diagrams/ClassDiagram%2BConceptModel.png)
-*[UseCaseses1](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/docs/Diagrams/UseCases1.png)
+*[ActivityDiagramConceptInteractionFlow.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/ActivityDiagramConceptInteractionFlow.png)
+*[ActivityDiagramTaskInteractionFlow01.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/ActivityDiagramTaskInteractionFlow01.png)
+*[ActivityDiagramTaskInteractionFlow02.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/ActivityDiagramTaskInteractionFlow02.png)
+*[ClassDiagram1.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/ClassDiagram1.png)
+*[ConceptUseCase.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/ConceptUseCase.png)
+*[ContentUseCase.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/ContentUseCase.png)
+*[TaskUseCase.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/TaskUseCase.png)
+*[UserUseCase.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/UserUseCase.png)
+*[HCI01.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/HCI01.png)
+*[SequenceDiagram.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/SequenceDiagram.png)
+*[StateMap.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/StateMap.png)
+*[StructuralModel1.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/StructuralModel1.png)
+*[StructuralModel2.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/StructuralModel2.png)
+*[StructuralModel3.png](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/StructuralModel3.png)
+*[Insomnia_2021-12-16.json](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/Insomnia_2021-12-16.json)
+*[MiroLeftTuesday.pdf](https://github.com/ericschoenborn/GVSU-CIS641-LeftTuesday/blob/master/FinalDeliverables/MiroLeftTuesday.pdf)
 
